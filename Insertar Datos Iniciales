@@ -1,0 +1,142 @@
+
+INSERT INTO Sexo(id_sexo, sexo) VALUES
+(1,'Femenino'),
+(2,'Masculino');
+GO
+
+INSERT INTO Pais (id_pais, pais) VALUES
+(1,'Colombia'),
+(2,'Argentina'),
+(3,'Chile'),
+(4,'Peru'),
+(5,'Ecuador'),
+(6,'Venezuela'),
+(7,'Brasil'),
+(8,'Paraguay'),
+(9,'Uruguay'),
+(10,'Bolivia'),
+(11,'Estados Unidos'),
+(12,'Canada'),
+(13,'España'),
+(14,'Francia'),
+(15,'Italia'),
+(16,'Alemania'),
+(17,'China'),
+(18,'Rusia');
+GO
+
+
+INSERT INTO Ciudad(id_ciudad,ciudad) VALUES
+(1,'Bogota'),
+(2,'Buenos Aires'),
+(3,'Santiago de Chile'),
+(4,'Lima'),
+(5,'Quito'),
+(6,'Caracas'),
+(7,'Brasilia'),
+(8,'Asucion'),
+(9,'Montevideo'),
+(10,'Sucre'),
+(11,'Washington D.C.'),
+(12,'Ottawa'),
+(13,'Madrid'),
+(14,'Paris'),
+(15,'Roma'),
+(16,'Berlin'),
+(17,'Pekin'),
+(18,'Moscu');
+GO
+
+
+INSERT INTO CargoEquipo (id_cargo, Cargo) VALUES
+(1,'Cargo1'),
+(2,'Cargo2'),
+(3,'Cargo3'),
+(4,'Cargo4'),
+(5,'Cargo5'),
+(6,'Cargo6'),
+(7,'Cargo7'),
+(8,'Cargo8');
+GO
+
+
+INSERT INTO NombresEquipo (id_Nequipo, NombreEquipo) VALUES
+(1, 'Equipo1'),
+(2, 'Equipo2'),
+(3, 'Equipo3'),
+(4, 'Equipo4'),
+(5, 'Equipo5'),
+(6, 'Equipo6'),
+(7, 'Equipo7'),
+(8, 'Equipo8'),
+(9, 'Equipo9');
+GO
+
+
+INSERT INTO Administrador (id_Admin,nombre, apellido, fecha_nacimiento, telefono, email, direccion, id_sexo, id_pais, id_ciudad) VALUES
+(1,'Admin1','Apellido1','2006-03-28','981374525','email1@gmail.com','cll 64', 2,1,1),
+(2,'Admin2','Apellido2','2016-03-28','123534566','email2@gmail.com','cll 64', 1,18,8),
+(3,'Admin3','Apellido3','2016-04-18','298375234','email3@gmail.com','cll 64', 1,3,7),
+(4,'Admin4','Apellido4','2003-12-08','192836532','email4@gmail.com','cll 64', 1,2,5),
+(5,'Admin5','Apellido5','2006-08-28','923862343','email5@gmail.com','cll 64', 2,9,12);
+GO
+
+
+INSERT INTO Manager (id_manager, id_Nequipo,nombre, apellido, fecha_nace, telefono, email, direccion, id_sexo, id_pais, id_ciudad) VALUES
+(1, 1, 'Manager1','Apellido1','2005-04-28','2983424235','email1@gmail.com','cll100',2,5,10),
+(2, 3, 'Manager2','Apellido2','2005-05-28','3128731642','email2@gmail.com','cll100',1,1,6),
+(3, 2, 'Manager3','Apellido3','2005-06-28','0297432421','email3@gmail.com','cll100',2,9,7),
+(4, 8, 'Manager4','Apellido4','2005-07-28','1286832521','email4@gmail.com','cll100',1,16,8),
+(5, 6, 'Manager5','Apellido5','2005-08-28','1029743242','email5@gmail.com','cll100',2,11,9);
+GO
+
+
+INSERT INTO MiembrosEquipo(id_Mequipo,id_Nequipo, nombre, apellido,id_cargo, fecha_nace, telefono, email, direccion, id_sexo, id_pais, id_ciudad) VALUES	
+(1,2,'Miembro1','Apellido1',1,'2005-03-28','290836452','email1@gmail.com','cll100',1,5,14),
+(2,4,'Miembro2','Apellido2',1,'2018-03-29','298742323','email2@gmail.com','cll10',2,5,3),
+(3,6,'Miembro3','Apellido3',1,'2005-04-30','290823552','email3@gmail.com','cll20',2,5,2),
+(4,3,'Miembro4','Apellido4',1,'2015-03-31','292452352','emai4@gmail.com','cll30',1,5,8),
+(5,1,'Miembro5','Apellido5',1,'2005-08-18','290252645','email5@gmail.com','cll50',2,5,3);
+GO
+
+CONSULTAS
+
+SELECT nombre,apellido FROM Administrador;
+
+SELECT *FROM Administrador;
+
+SELECT *FROM Manager;
+
+SELECT *FROM MiembrosEquipo;
+
+SELECT *FROM MiembrosEquipo WHERE id_Nequipo LIKE 'E%';
+
+SELECT *FROM Administrador WHERE id_sexo=2;
+
+SELECT *FROM Manager WHERE id_sexo =1;
+
+SELECT *FROM MiembrosEquipo WHERE id_sexo=2;
+
+SELECT *FROM MiembrosEquipo WHERE nombre LIKE '%Miembro%';
+
+SELECT nombre, apellido FROM MiembrosEquipo WHERE id_ciudad = 3;
+
+SELECT nombre, apellido,email FROM Manager WHERE id_sexo=1;
+
+SELECT nombre, apellido,id_ciudad FROM Administrador WHERE nombre LIKE 'Admin%';
+
+SELECT nombre, apellido,id_pais FROM Manager WHERE id_sexo=2;
+
+SELECT id_pais FROM Manager;
+
+SELECT id_ciudad FROM Administrador;
+
+SELECT nombre,apellido FROM Manager ORDER BY apellido;
+
+SELECT id_pais FROM MiembrosEquipo ORDER BY id_pais ASC;
+
+SELECT nombre, apellido FROM Administrador ORDER BY nombre ASC, apellido ASC;
+
+SELECT id_pais, COUNT(*) AS CantidadManager FROM Manager GROUP BY id_pais;
+
+SELECT id_ciudad, COUNT(*) AS CantidadMiembros FROM MiembrosEquipo GROUP BY id_ciudad;
