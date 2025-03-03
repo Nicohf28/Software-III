@@ -1,0 +1,106 @@
+USE Inscripcion;
+
+CREATE TABLE Ciudad(
+
+	id_ciudad INT PRIMARY KEY,
+	ciudad VARCHAR(50),
+
+);
+GO
+
+CREATE TABLE CargoEquipo (
+
+	id_cargo INT PRIMARY KEY,
+	Cargo VARCHAR(100),
+
+);
+GO
+
+CREATE TABLE sexo (
+
+	id_sexo INT PRIMARY KEY,
+	sexo VARCHAR(25),
+
+);
+GO
+
+CREATE TABLE Pais(
+
+	id_pais INT PRIMARY KEY,
+	pais VARCHAR(50)
+
+);
+
+CREATE TABLE NombresEquipo (
+	
+	id_Nequipo INT PRIMARY KEY,
+	NombreEquipo VARCHAR (50)
+
+);
+GO
+
+
+CREATE TABLE Administrador( 
+
+	id_Admin INT PRIMARY KEY,
+	nombre VARCHAR(50),
+	apellido VARCHAR(50),
+	fecha_nacimiento DATE,
+	telefono INT,
+	email VARCHAR(100),
+	direccion VARCHAR(255),
+	id_sexo INT,
+	id_pais INT,
+	id_ciudad INT
+	
+	FOREIGN KEY (id_pais) REFERENCES Pais(id_pais),
+	FOREIGN KEY (id_ciudad) REFERENCES Ciudad(id_ciudad),
+	FOREIGN KEY (id_sexo) REFERENCES sexo(id_sexo),
+
+);
+GO
+
+CREATE TABLE Manager (
+
+	id_manager INT PRIMARY KEY,
+	nombre VARCHAR(50),
+	apellido VARCHAR(50),
+	fecha_nace DATE,
+	telefono INT,
+	email VARCHAR(100),
+	direccion VARCHAR(255),
+	id_Nequipo INT,
+	id_pais INT,
+	id_ciudad INT,
+	id_sexo INT,
+
+	FOREIGN KEY (id_Nequipo) REFERENCES NombresEquipo(id_Nequipo),
+	FOREIGN KEY (id_pais) REFERENCES Pais(id_pais),
+	FOREIGN KEY (id_ciudad) REFERENCES Ciudad(id_ciudad),
+	FOREIGN KEY (id_sexo) REFERENCES sexo(id_sexo),
+);
+GO
+
+CREATE TABLE MiembrosEquipo(
+
+	id_Mequipo INT PRIMARY KEY,
+	nombre VARCHAR(50),
+	apellido VARCHAR(50),
+	id_cargo INT,
+	fecha_nace DATE,
+	telefono INT,
+	email VARCHAR(100),
+	direccion VARCHAR(255),
+	id_Nequipo INT,
+	id_pais INT,
+	id_ciudad INT,
+	id_sexo INT,
+
+	FOREIGN KEY (id_cargo) REFERENCES CargoEquipo(id_cargo),
+	FOREIGN KEY (id_Nequipo) REFERENCES NombresEquipo(id_Nequipo),
+	FOREIGN KEY (id_pais) REFERENCES Pais(id_pais),
+	FOREIGN KEY (id_ciudad) REFERENCES Ciudad(id_ciudad),
+	FOREIGN KEY (id_sexo) REFERENCES sexo(id_sexo),
+
+);
+GO
