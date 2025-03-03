@@ -1,0 +1,93 @@
+
+USE Modificacion;
+CREATE TABLE Modificacion(
+    
+    id_codmodificacion INT PRIMARY KEY,
+    id_tipomodificacion INT,
+    fecha_modificacion DATE,
+    fecha_solimodifi DATE,
+    FOREIGN KEY ( id_tipomodificacion ) REFERENCES TipoModi(id_tipomodificacion)
+);
+
+CREATE TABLE TipoModi(
+    id_tipomodificacion INT PRIMARY KEY, 
+    modificacion VARCHAR(35),
+    descripcion VARCHAR(200),
+    id_sancion INT,
+    FOREIGN KEY ( id_sancion ) REFERENCES Sanciones(id_sancion)
+);
+CREATE TABLE Sanciones(
+    id_sancion INT PRIMARY KEY,
+    sancion VARCHAR(200)
+);
+CREATE TABLE Manager(
+    id_manager INT PRIMARY KEY,
+    nombre VARCHAR (50),
+    apellido VARCHAR (50),
+    fecha_nace DATE,
+    telefono INT,
+    email VARCHAR (100),
+    direccion VARCHAR (255),
+    id_Nequipo INT,
+    id_pais INT,
+    id_ciudad INT,
+    id_sexo INT,
+    FOREIGN KEY (id_Nequipo) REFERENCES NombresEquipo (id_Nequipo),
+    FOREIGN KEY (id_pais) REFERENCES Pais (id_pais),
+    FOREIGN KEY (id_ciudad) REFERENCES Ciudad (id_ciudad),
+    FOREIGN KEY (id_sexo) REFERENCES Sexo (id_sexo)
+    
+);
+CREATE TABLE MiembrosEquipo(
+    id_Mequipo INT PRIMARY KEY,
+    nombre VARCHAR(100),
+    apellido VARCHAR(50),
+    id_cargo INT,
+    fecha_nace DATE,
+    telefono INT,
+    email VARCHAR(50),
+    direccion VARCHAR(255),
+    id_Nequipo INT,
+    id_pais INT,
+    id_ciudad INT,
+    id_sexo INT,
+    FOREIGN KEY (id_Nequipo) REFERENCES NombresEquipo (id_Nequipo),
+    FOREIGN KEY (id_pais) REFERENCES Pais (id_pais),
+    FOREIGN KEY (id_ciudad) REFERENCES Ciudad (id_ciudad),
+    FOREIGN KEY (id_sexo) REFERENCES Sexo (id_sexo),
+    FOREIGN KEY (id_cargo) REFERENCES CargoEquipo (id_cargo)
+);
+CREATE TABLE Pais(
+    id_pais INT PRIMARY KEY,
+    pais VARCHAR(50)
+);
+CREATE TABLE Ciudad(
+    id_ciudad INT PRIMARY KEY,
+    ciudad VARCHAR(50)
+);
+CREATE TABLE CargoEquipo(
+    id_cargo INT PRIMARY KEY,
+    cargo VARCHAR(100)
+);
+CREATE TABLE sexo(
+    id_sexo INT PRIMARY KEY,
+    sexo VARCHAR(35)
+);
+CREATE TABLE NombresEquipo(
+    id_Nequip INT PRIMARY KEY,
+    NombreEquipo VARCHAR(50)
+);
+CREATE TABLE Ticket(
+    id_ticket INT PRIMARY KEY
+    id_codmodificacion INT,
+    id_manager INT,
+    id_Mequipo INT,
+    id_Nequipo INT ,
+    fecha_ticket DATE,
+    FOREIGN KEY (id_codmodificacion) REFERENCES Modificacion (id_codmodificacion),
+    FOREIGN KEY (id_manager) REFERENCES Manager (id_manager),
+    FOREIGN KEY (id_Mequipo) REFERENCES MiembrosEquipo(id_Mequipo),
+    FOREIGN KEY (id_Nequipo) REFERENCES NombreEquipo (id_Nequipo),
+
+    
+);
